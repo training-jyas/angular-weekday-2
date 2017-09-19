@@ -1,0 +1,17 @@
+<!-- <input 
+    class="form-control"
+    (input)="onServerNameChange($event)"> -->
+<input 
+    class="form-control"
+    [(ngModel)]="serverName">
+<button 
+    class="btn btn-primary" 
+    [disabled]="!canAddServer">Add Server</button>
+<hr>
+{{ canAddServer }}<br>
+{{ "Server name to add is"}} {{ serverName }}
+<p>This is the list of servers !</p>
+<app-server></app-server>
+<app-server></app-server>
+<app-server></app-server>
+
