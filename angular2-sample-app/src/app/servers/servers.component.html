@@ -4,14 +4,13 @@
 <input 
     class="form-control"
     [(ngModel)]="serverName">
-<button 
+<button
     class="btn btn-primary" 
-    [disabled]="!canAddServer">Add Server</button>
+    [disabled]="!canAddServer"
+    (click)="addServer()">Add Server</button>
 <hr>
-{{ canAddServer }}<br>
-{{ "Server name to add is"}} {{ serverName }}
-<p>This is the list of servers !</p>
-<app-server></app-server>
-<app-server></app-server>
-<app-server></app-server>
+<p *ngIf="isServerAdded">Server name to add is {{ serverName }}</p>
+<p *ngIf="!isServerAdded">Server is not added.</p>
+<p *ngIf="servers.length > 0">Below is the list of servers !</p>
+<app-server *ngFor="let server of servers"></app-server>
 
