@@ -1,5 +1,5 @@
 {
-  "name": "angular2-sample-app",
+  "name": "recipe-cart",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -24,7 +24,6 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
-    "timers": "^0.1.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
