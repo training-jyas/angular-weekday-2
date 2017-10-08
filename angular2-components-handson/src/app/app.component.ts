@@ -6,23 +6,34 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  serverElements = [];
-  newServerName = '';
-  newServerContent = '';
+  serverElements: Array<{'type': string, 'name': string, 'content': string}> = [];
 
-  onAddServer() {
+  constructor() {
+    // this.serverElements.push({
+    //   'type': 'server',
+    //   'name': 'Server 1',
+    //   'content': 'content for server 1'
+    // });
+    // this.serverElements.push({
+    //   'type': 'blueprint',
+    //   'name': 'blurprint 1',
+    //   'content': 'content for blueprint 1'
+    // });
+  }
+
+  onServerAdded(eventData: {'serverName': string, 'serverContent': string}) {
     this.serverElements.push({
-      type: 'server',
-      name: this.newServerName,
-      content: this.newServerContent
+      'type': 'server',
+      'name': eventData.serverName,
+      'content': eventData.serverContent
     });
   }
 
-  onAddBlueprint() {
+  onBlueprintAdded(eventData: {'serverName': string, 'serverContent': string}) {
     this.serverElements.push({
-      type: 'blueprint',
-      name: this.newServerName,
-      content: this.newServerContent
+      'type': 'blueprint',
+      'name': eventData.serverName,
+      'content': eventData.serverContent
     });
   }
 }
