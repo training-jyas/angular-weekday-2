@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewEncapsulation, ViewChild } from '@angular/core';
 
 @Component({
     'selector': 'app-create',
@@ -8,29 +8,30 @@ import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/cor
 export class CreateComponent {
     @Output() serverCreated = new EventEmitter<{'serverName': string, 'serverContent': string}>();
     @Output("bpCreated") blurprintCreated = new EventEmitter<{'serverName': string, 'serverContent': string}>();
-    newServerName = '';
-    newServerContent = '';
+
+    @ViewChild('contentInput') contentInput: ElementRef;
+    // newServerName = '';
+    // newServerContent = '';
 
     constructor() {
         
     }
 
-    onCreateServer() {
+    onCreateServer(serverInput: HTMLInputElement) {
         this.serverCreated.emit({
-            'serverName': this.newServerName,
-            'serverContent': this.newServerContent
+            'serverName': serverInput.value,
+            'serverContent': this.contentInput.nativeElement.value
         });
     }
 
-    onCreateBlueprint() {
+    onCreateBlueprint(serverInput: HTMLInputElement) {
         this.blurprintCreated.emit({
-            'serverName': this.newServerName,
-            'serverContent': this.newServerContent
+            'serverName': serverInput.value,
+            'serverContent': this.contentInput.nativeElement.value
         });
     }
 
     reset() {
-        this.newServerName = '';
-        this.newServerContent = '';
+        
     }
 }
