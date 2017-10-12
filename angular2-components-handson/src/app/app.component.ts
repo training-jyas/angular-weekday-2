@@ -9,16 +9,16 @@ export class AppComponent {
   serverElements: Array<{'type': string, 'name': string, 'content': string}> = [];
 
   constructor() {
-    // this.serverElements.push({
-    //   'type': 'server',
-    //   'name': 'Server 1',
-    //   'content': 'content for server 1'
-    // });
-    // this.serverElements.push({
-    //   'type': 'blueprint',
-    //   'name': 'blurprint 1',
-    //   'content': 'content for blueprint 1'
-    // });
+    this.serverElements.push({
+      'type': 'server',
+      'name': 'Server 1',
+      'content': 'content for server 1'
+    });
+    this.serverElements.push({
+      'type': 'blueprint',
+      'name': 'blurprint 1',
+      'content': 'content for blueprint 1'
+    });
   }
 
   onServerAdded(eventData: {'serverName': string, 'serverContent': string}) {
@@ -35,5 +35,9 @@ export class AppComponent {
       'name': eventData.serverName,
       'content': eventData.serverContent
     });
+  }
+
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1);
   }
 }

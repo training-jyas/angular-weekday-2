@@ -1,11 +1,20 @@
 <div class="container">
   <app-create
     (serverCreated)="onServerAdded($event)"
-    (bpCreated)="onBlueprintAdded($event)"></app-create>
+    (bpCreated)="onBlueprintAdded($event)">
+  </app-create>
   <hr>
   <div class="row">
     <div class="col-xs-12">
-      <app-server-element *ngFor="let element of serverElements" [srvElement]="element"></app-server-element>
+      <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy first Component</button>
+      <app-server-element 
+        *ngFor="let element of serverElements" 
+        [srvElement]="element">
+        <p #contentParagraph>
+          <strong *ngIf="element.type === 'server'" style="color: red">{{ element.content }}</strong>
+          <em *ngIf="element.type === 'blueprint'">{{ element.content }}</em>
+        </p>
+      </app-server-element>
     </div>
   </div>
 </div>
