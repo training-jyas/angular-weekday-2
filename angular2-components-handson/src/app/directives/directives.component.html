@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <input type="number" class="form-control" [(ngModel)]="maxNumber">
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-primary" (click)="generate()">Generate Num List</button>
+      <button class="btn btn-primary" (click)="isOdd = !isOdd">Toggle</button>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4 *ngIf="isOdd; else evenHeader">Odd List</h4>
+      <ng-template #evenHeader>
+        <h4>Even List</h4>
+      </ng-template>
+      <ul class="list-group">
+        <div *ngFor="let num of numbers">
+          <li 
+            class="list-group-item"
+            *ngIf="isOdd && num % 2 !== 0"
+            [ngStyle]="{'backgroundColor': num % 2 !== 0 ? 'red' : 'transparent'}">
+            {{ num }}
+          </li>
+          <li 
+            class="list-group-item"
+            *ngIf="!isOdd && num % 2 === 0"
+            [ngClass]="{'even': num % 2 === 0}">
+            {{ num }}
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Basic Directive</h4>
+      <p appBasicDirective>
+        Basic directive applied here !
+      </p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Better Directive</h4>
+      <p appBetterDirective>
+        Better directive applied here !
+      </p>
+    </div>
+  </div>
+</div>
