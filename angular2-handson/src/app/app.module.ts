@@ -11,6 +11,9 @@ import { ComponentsComponent } from './components/components.component';
 import { DirectivesComponent } from './directives/directives.component';
 import { BasicDirectiveDirective } from './directives/basic-directive/basic-directive.directive';
 import { BetterDirectiveDirective } from './directives/better-directive/better-directive.directive';
+import { ServicesComponent } from './services/services.component';
+import { AccountComponent } from './services/account/account.component';
+import { NewAccountComponent } from './services/new-account/new-account.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { BetterDirectiveDirective } from './directives/better-directive/better-d
     ComponentsComponent,
     DirectivesComponent,
     BasicDirectiveDirective,
-    BetterDirectiveDirective
+    BetterDirectiveDirective,
+    ServicesComponent,
+    AccountComponent,
+    NewAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,7 @@ export class AppComponent {
   moduleSelected: string;
 
   constructor() {
-    this.moduleSelected = 'directives';
+    this.moduleSelected = 'services';
   }
 
   onHeaderItemWasSelected(module) {
