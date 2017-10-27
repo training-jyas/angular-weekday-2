@@ -20,4 +20,12 @@ export class ShoppingListService {
     this.ingredients.push(ingredient);
     this.ingredientAdded.emit(this.ingredients);
   }
+
+  addIngredients(ingredients: Ingredient[]) {
+    // ingredients.forEach(each => {
+    //   this.ingredients.push(each);
+    // });
+    this.ingredients.push(...ingredients); // we are using the spread operator to push array into a array
+    this.ingredientAdded.emit(this.ingredients);
+  }
 }
