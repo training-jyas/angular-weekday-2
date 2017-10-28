@@ -9,10 +9,5 @@ export class AppComponent {
   featureSelected: string;
 
   constructor() {
-    this.featureSelected = 'recipes';
-  }
-
-  onHeaderItemWasSelected(feature) {
-    this.featureSelected = feature;
   }
 }
