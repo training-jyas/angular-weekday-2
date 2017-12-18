@@ -23,10 +23,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     this.subscription = this.recipeService.recipesChanged
       .subscribe(
         (recipes: Recipe[]) => {
+          console.log(recipes);
           this.recipes = recipes;
         }
       );
-    this.recipes = this.recipeService.getRecipes();
   }
 
   onNewRecipe() {

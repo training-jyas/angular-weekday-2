@@ -22,9 +22,9 @@ export class DataStorageService {
   saveRecipes() {
     console.log('save recipes', this.recipeService.getRecipes());
     this.http.post('http://localhost:3000/recipes', this.recipeService.getRecipes())
-    .subscribe(response => {
+      .subscribe(response => {
         console.log('post response', response.json());
-    });
+      });
   }
 
   getRecipes() {
