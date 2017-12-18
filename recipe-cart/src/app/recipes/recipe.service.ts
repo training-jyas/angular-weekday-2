@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import {
+  Http,
+  Response
+} from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 
 import { Recipe } from './recipe.model';
@@ -11,7 +15,8 @@ export class RecipeService {
 
   private recipes: Recipe[] = [];
 
-  constructor(private slService: ShoppingListService) {}
+  constructor(private slService: ShoppingListService,
+              private http: Http) {}
 
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
@@ -22,8 +27,15 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipe(index: number) {
-    return this.recipes[index];
+  getRecipe(id: string) {
+    let matchingRecipe = new Recipe('', '', '', []);
+    this.recipes.forEach(recipe => {
+      console.log(recipe['_id'], id);
+      if (recipe['_id'] === id) {
+        matchingRecipe = recipe;
+      }
+    });
+    return matchingRecipe;
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
@@ -35,13 +47,29 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
-    this.recipes[index] = newRecipe;
+  updateRecipe(id: string, newRecipe: Recipe) {
+    newRecipe._id = id;
+    this.recipes.forEach((recipe: Recipe) => {
+      if (recipe['_id'] === id) {
+        recipe.name = newRecipe.name;
+        recipe.description = newRecipe.description;
+        recipe.imagePath = newRecipe.imagePath;
+        recipe.ingredients = newRecipe.ingredients;
+      }
+    });
     this.recipesChanged.next(this.recipes.slice());
+    this.updateRecipeInDb(newRecipe);
   }
 
-  deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.recipes.slice());
+  deleteRecipe(id: string) {
+    // this.recipes.splice(id, 1);
+    // this.recipesChanged.next(this.recipes.slice());
+  }
+
+  updateRecipeInDb(recipe) {
+    this.http.put('http://localhost:3000/recipe', recipe)
+      .subscribe(response => {
+        console.log('put response', response.json());
+      });
   }
 }

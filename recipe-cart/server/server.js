@@ -64,6 +64,25 @@ app.post('/recipes', (req, res) => {
   });
 });
 
+app.put('/recipe', (req, res) => {
+  req.Recipe.update({
+    _id: req.body._id
+  }, {
+    $set: {
+      name: req.body.name,
+      description: req.body.description,
+      imagePath: req.body.imagePath,
+      ingredients: req.body.ingredients
+    }
+  }, {}, (error, doc) => {
+    if (error) {
+      res.status(400).send(error);
+    } else {
+      res.send(doc);
+    }
+  })
+});
+
 app.listen(3000, () => {
   console.log('server is started in port 3000!');
 });
