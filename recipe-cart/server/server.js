@@ -47,20 +47,18 @@ app.get('/recipes', (req, res) => {
     })
 });
 
-app.post('/recipes', (req, res) => {
-  req.body.forEach(recipe => {
-    var recipeToSave = new req.Recipe({
-      name: recipe.name,
-      description: recipe.description,
-      imagePath: recipe.imagePath,
-      ingredients: recipe.ingredients
-    });
+app.post('/recipe', (req, res) => {
+  var recipeToSave = new req.Recipe({
+    name: req.body.name,
+    description: req.body.description,
+    imagePath: req.body.imagePath,
+    ingredients: req.body.ingredients
+  });
 
-    recipeToSave.save().then((doc) => {
-      res.send(doc);
-    }, (e) => {
-      res.status(400).send(e);
-    });
+  recipeToSave.save().then((doc) => {
+    res.send(doc);
+  }, (e) => {
+    res.status(400).send(e);
   });
 });
 
@@ -81,6 +79,27 @@ app.put('/recipe', (req, res) => {
       res.send(doc);
     }
   })
+});
+
+app.delete('/recipe/:id', (req, res) => {
+  let recipeId = req.params.id;
+  if (!recipeId) {
+    res.send(400).send({
+      message: 'Please send the recipe id to delete as a query parameter!'
+    });
+  }
+  // mongo db call to delete the recipe
+  req.Recipe.remove({
+    _id: recipeId
+  }, (error) => {
+    if (error) {
+      res.status(400).send(error);
+    } else {
+      res.status(200).send({
+        message: 'Recipe with id "' + recipeId + '" successfully deleted!'
+      });
+    }
+  });
 });
 
 app.listen(3000, () => {
