@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/RecipeCart');
+mongoose.connect('mongodb://localhost:27017/RecipeCart', {
+    useMongoClient: true
+});
 
 module.exports = {mongoose};

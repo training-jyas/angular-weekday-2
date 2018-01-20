@@ -75,7 +75,7 @@ export class RecipeService {
     this.http.get('http://localhost:3000/recipes')
       .map(
         (response: Response) => {
-          console.log('get recipes', response);
+          console.log('get recipes', response.json());
           const recipes: Recipe[] = response.json();
           for (const recipe of recipes) {
             if (!recipe['ingredients']) {
